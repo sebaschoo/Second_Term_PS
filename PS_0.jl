@@ -16,6 +16,7 @@ function normal_ar(ρ, N)
 
     y = [0.0 for i = 1:N]
 
+    Random.seed!(641993)
     ϵ = rand(d, N)
 
     for i in 1:(N-1)
@@ -28,6 +29,6 @@ end
 ρ=0.2
 N=1000
 z = normal_ar(ρ,N)
+t = collect(range(1,stop=1000,length=1000))
 
-plot!(1:1000, z)
-z
+plot(t, z)
