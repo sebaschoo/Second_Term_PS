@@ -14,7 +14,7 @@ using QuantEcon
 # Question 1
 ############
 
-function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_std::T3) where {T1 <: Real, T2 <: Real, T3 <: Real}
+function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_std::T3=4) where {T1 <: Real, T2 <: Real, T3 <: Real}
     # Discretized space
     a_bar = n_std * sqrt(σ^2 / (1 - ρ^2))
     y = range(-a_bar, stop=a_bar, length=N)
@@ -34,7 +34,7 @@ function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_st
         end
     end
 
-    MarkovChain(Π, y)
+    return Π, y
     
 end
 
