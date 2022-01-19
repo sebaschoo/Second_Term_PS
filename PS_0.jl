@@ -1,16 +1,20 @@
-################################
-### Problem Set 0 - ECON 603 ###
-################################
+                                            ################################
+                                            ### Problem Set 0 - ECON 603 ###
+                                            ################################
 
-#Name: Sebastian Melo-Martin
+                                                #Sebastian Melo-Martin
 
+
+# Call some useful packages 
 using Distributions
 using Random
 using QuantEcon
 
-#1
+############
+# Question 1
+############
 
-function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_std::T3=3) where {T1 <: Real, T2 <: Real, T3 <: Real}
+function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_std::T3) where {T1 <: Real, T2 <: Real, T3 <: Real}
     # Discretized space
     a_bar = n_std * sqrt(σ^2 / (1 - ρ^2))
     y = range(-a_bar, stop=a_bar, length=N)
@@ -31,10 +35,14 @@ function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_st
     end
 
     MarkovChain(Π, y)
+    
 end
 
-tauchen(2,0.2,0.4)
-z
+z = tauchen(3,0.2,0.4,3)
+
+
+
+
 
 #2
 
