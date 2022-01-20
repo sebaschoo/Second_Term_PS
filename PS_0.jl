@@ -10,11 +10,15 @@ using Distributions
 using Random
 using QuantEcon
 using Plots
-
+using NLopt
+using SpecialFunctions
 
 ############
 # Question 1
 ############
+
+std_norm_cdf(x::T) where {T <: Real} = 0.5 * erfc(-x/sqrt(2))
+std_norm_cdf(x::Array{T}) where {T <: Real} = 0.5 .* erfc(-x./sqrt(2))
 
 function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_std::T3=3) where {T1 <: Real, T2 <: Real, T3 <: Real}
     # Discretized space
@@ -26,23 +30,27 @@ function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_st
     Π = zeros(promote_type(T1, T2), N, N)
     for row = 1:N
         # Do end points first
-        Π[row, 1] = cdf(Normal(),((y[1] - ρ*y[row] + d/2) / σ))
-        Π[row, N] = 1 - cdf(Normal(),((y[N] - ρ*y[row] - d/2) / σ))
+        Π[row, 1] = std_norm_cdf((y[1] - ρ*y[row] + d/2) / σ)
+        Π[row, N] = 1 - std_norm_cdf((y[N] - ρ*y[row] - d/2) / σ)
 
         # Fill in columns
         for col = 2:N-1
-            Π[row, col] = (cdf(Normal(),((y[col] - ρ*y[row] + d/2) / σ)) -
-                           cdf(Normal(),((y[col] - ρ*y[row] - d/2) / σ)))
+            Π[row, col] = (std_norm_cdf((y[col] - ρ*y[row] + d/2) / σ) -
+                           std_norm_cdf((y[col] - ρ*y[row] - d/2) / σ))
         end
     end
 
-    return Π, y
+    yy = y .+ μ / (1 - ρ)  
+    Π = Π./sum(Π, dims = 2)
+
+    return Π, yy
     
 end
 
 vec_matrix = [zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1)]
 
 for i in [0.2, 0.7, 0.9, 0.98]
+    Random.seed!(641993)
     z = tauchen(3,i,0.4)
     if i==0.2
         vec_matrix[1] = z[1]
