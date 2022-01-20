@@ -215,25 +215,57 @@ t = collect(range(1,stop=1000,length=1000))
 plot(t, y_tau)
 
 # Rouwenhorst
+z = rouwenhorst(10,0.2,0.4)
+prob_rou = z[1]
+ybar_rou = @show Vector(z[2])
 
-# AR(1)
-function normal_ar(ρ, N)
-    d = Normal(0, 0.16)
-    y = [0.0 for i = 1:N]
-    Random.seed!(641993)
-    ϵ = rand(d, N)
-    for i in 1:(N-1)
-        y[i+1] = ρ*y[i] + ϵ[i] 
+y_rou = zeros(1000,1)
+pos = zeros(1000,1)
+y_rou[1] = ybar_tau[rand(1:10)]
+
+for i=2:1000
+    x=rand()
+    for j=1:10
+        if y_rou[i-1]==ybar_rou[j]
+            pos[i] = j
+        end
     end
-    return y
+    prob_row = prob_rou[floor(Int, pos[i]),:]
+    thr_1 = prob_row[1]
+    thr_2 = thr_1 + prob_row[2]
+    thr_3 = thr_2 + prob_row[3]
+    thr_4 = thr_3 + prob_row[4]
+    thr_5 = thr_4 + prob_row[5]
+    thr_6 = thr_5 + prob_row[6]
+    thr_7 = thr_6 + prob_row[7]
+    thr_8 = thr_7 + prob_row[8]
+    thr_9 = thr_8 + prob_row[9]
+    if x<=thr_1
+        y_rou[i]=ybar_rou[1]
+    elseif x>thr_1 && x<=thr_2
+        y_rou[i] = ybar_rou[2]
+    elseif x>thr_2 && x<=thr_3
+        y_rou[i] = ybar_rou[3]
+    elseif x>thr_3 && x<=thr_4
+        y_rou[i] = ybar_rou[4]
+    elseif x>thr_4 && x<=thr_5
+        y_rou[i] = ybar_rou[5]
+    elseif x>thr_5 && x<=thr_6
+        y_rou[i] = ybar_rou[6]
+    elseif x>thr_6 && x<=thr_7
+        y_rou[i] = ybar_rou[7]
+    elseif x>thr_7 && x<=thr_8
+        y_rou[i] = ybar_rou[8]
+    elseif x>thr_8 && x<=thr_9
+        y_rou[i] = ybar_rou[9]
+    else
+        y_rou[i] = ybar_rou[10]
+    end
 end
 
-ρ=0.2
-N=10
-z = normal_ar(ρ,N)
-t = collect(range(1,stop=10,length=10))
+t = collect(range(1,stop=1000,length=1000))
+plot(t, y_rou)
 
-plot(t, z)
 
 ##############
 # Question 5 #
