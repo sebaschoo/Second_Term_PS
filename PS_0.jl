@@ -215,7 +215,7 @@ t = collect(range(1,stop=1000,length=1000))
 plot(t, y_tau)
 
 # Rouwenhorst
-z = rouwenhorst(10,0.2,0.4)
+z = rouwenhorst(10,0.2,0.4,0)
 prob_rou = z[1]
 ybar_rou = @show Vector(z[2])
 
@@ -270,3 +270,6 @@ plot(t, y_rou)
 ##############
 # Question 5 #
 ##############
+
+#= The coding for this question is already included previously in a loop
+    =#
