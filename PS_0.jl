@@ -94,6 +94,7 @@ plot(t, y_tau[2])
 plot(t, y_tau[3])
 plot(t, y_tau[4])
 
+
 ##############
 # Question 2 #
 ##############
@@ -183,6 +184,7 @@ plot(t, y_rou[2])
 plot(t, y_rou[3])
 plot(t, y_rou[4])
 
+
 ##############
 # Question 3 #
 ##############
@@ -226,7 +228,6 @@ plot(t, y_ar[4])
 ##############
 
 # Tauchen
-
 vec_matrix = [zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10)]
 
 for i in [0.2, 0.7, 0.9, 0.98]
@@ -303,7 +304,6 @@ plot(t, y_tau[3])
 plot(t, y_tau[4])
 
 # Rouwenhorst
-
 vec_matrix = [zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10)]
 
 for i in [0.2, 0.7, 0.9, 0.98]
