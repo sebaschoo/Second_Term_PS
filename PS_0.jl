@@ -42,41 +42,39 @@ end
 
 z = tauchen(3,0.2,0.4,3)
 prob_tau = z[1]
-y_tau = @show Vector(z[2])
+ybar_tau = @show Vector(z[2])
 
-y = zeros(1000,1)
+y_tau = zeros(1000,1)
 pos = zeros(1000,1)
-y[1] = y_tau[rand(1:3)]
-y
+y_tau[1] = ybar_tau[rand(1:3)]
 
 for i=2:1000
-
     x=rand()
     for j=1:3
-        if y[i-1]==y_tau[j]
+        if y_tau[i-1]==ybar_tau[j]
             pos[i] = j
         end
     end
     prob_row = prob_tau[floor(Int, pos[i]),:]
     thr_1 = prob_row[1]
-    thr_2 = thr_1 + prob_row[1]
+    thr_2 = thr_1 + prob_row[2]
     if x<=thr_1
-        y[i]=y_tau[1]
+        y_tau[i]=ybar_tau[1]
     elseif x>thr_1 && x<=thr_2
-        y[i] = y_tau[2]
+        y_tau[i] = ybar_tau[2]
     else
-        y[i] = y_tau[3]
+        y_tau[i] = ybar_tau[3]
     end
-
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y)
+plot(t, y_tau)
 
 ##############
 # Question 2 #
 ##############
 
+#Getting initial vector and probability matrix
 function rouwenhorst(N::Integer, ρ::Real, σ::Real, μ::Real)
 
     σ_y = σ / sqrt(1-ρ^2)
@@ -108,8 +106,34 @@ end
 
 z = rouwenhorst(3,0.2,0.4,0)
 prob_rou = z[1]
+ybar_rou = @show Vector(z[2])
 
-y_rou = @show Vector(z[2])
+#Simulating the time series
+y_rou = zeros(1000,1)
+pos = zeros(1000,1)
+y_rou[1] = ybar_rou[rand(1:3)]
+
+for i=2:1000
+    x=rand()
+    for j=1:3
+        if y_rou[i-1]==ybar_rou[j]
+            pos[i] = j
+        end
+    end
+    prob_row = prob_rou[floor(Int, pos[i]),:]
+    thr_1 = prob_row[1]
+    thr_2 = prob_row[1] + prob_row[2]
+    if x<=thr_1
+        y_rou[i]=ybar_rou[1]
+    elseif x>thr_1 && x<=thr_2
+        y_rou[i] = ybar_rou[2]
+    else
+        y_rou[i] = ybar_rou[3]
+    end
+end
+
+t = collect(range(1,stop=1000,length=1000))
+plot(t, y_rou)
 
 ##############
 # Question 3 #
@@ -128,10 +152,10 @@ end
 
 ρ=0.2
 N=1000
-z = normal_ar(ρ,N)
+y_ar = normal_ar(ρ,N)
 t = collect(range(1,stop=1000,length=1000))
 
-plot(t, z)
+plot(t, y_ar)
 
 
 ##############
@@ -155,9 +179,9 @@ function normal_ar(ρ, N)
 end
 
 ρ=0.2
-N=100
+N=10
 z = normal_ar(ρ,N)
-t = collect(range(1,stop=1000,length=1000))
+t = collect(range(1,stop=10,length=10))
 
 plot(t, z)
 
