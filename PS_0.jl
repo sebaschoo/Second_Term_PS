@@ -198,12 +198,27 @@ function normal_ar(ρ, N)
     return y
 end
 
-ρ=0.2
-N=1000
-y_ar = normal_ar(ρ,N)
-t = collect(range(1,stop=1000,length=1000))
+y_ar = [zeros(1000), zeros(1000), zeros(1000), zeros(1000)]
 
-plot(t, y_ar)
+N=1000
+for i in [0.2, 0.7, 0.9, 0.98]
+    ρ=i
+    if i==0.2
+        y_ar[1] = normal_ar(ρ,N)
+    elseif i==0.7
+        y_ar[2] = normal_ar(ρ,N)
+    elseif i==0.9
+        y_ar[3] = normal_ar(ρ,N)
+    else
+        y_ar[4] = normal_ar(ρ,N)
+    end 
+end
+
+t = collect(range(1,stop=1000,length=1000))
+plot(t, y_ar[1])
+plot(t, y_ar[2])
+plot(t, y_ar[3])
+plot(t, y_ar[4])
 
 
 ##############
