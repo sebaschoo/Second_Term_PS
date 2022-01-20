@@ -40,35 +40,59 @@ function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_st
     
 end
 
-z = tauchen(3,0.2,0.4)
-prob_tau = z[1]
-ybar_tau = @show Vector(z[2])
+vec_matrix = [zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1)]
 
-y_tau = zeros(1000,1)
-pos = zeros(1000,1)
-y_tau[1] = ybar_tau[rand(1:3)]
-
-for i=2:1000
-    x=rand()
-    for j=1:3
-        if y_tau[i-1]==ybar_tau[j]
-            pos[i] = j
-        end
-    end
-    prob_row = prob_tau[floor(Int, pos[i]),:]
-    thr_1 = prob_row[1]
-    thr_2 = thr_1 + prob_row[2]
-    if x<=thr_1
-        y_tau[i]=ybar_tau[1]
-    elseif x>thr_1 && x<=thr_2
-        y_tau[i] = ybar_tau[2]
+for i in [0.2, 0.7, 0.9, 0.98]
+    z = tauchen(3,i,0.4)
+    if i==0.2
+        vec_matrix[1] = z[1]
+        vec_matrix[2] = z[2]
+    elseif i==0.7
+        vec_matrix[3] = z[1]
+        vec_matrix[4] = z[2]
+    elseif i==0.9
+        vec_matrix[5] = z[1]
+        vec_matrix[6] = z[2]
     else
-        y_tau[i] = ybar_tau[3]
+        vec_matrix[7] = z[1]
+        vec_matrix[8] = z[2]
+    end
+end  
+
+y_tau = [zeros(1000,1), zeros(1000,1), zeros(1000,1), zeros(1000,1)]
+pos = [zeros(1000,1), zeros(1000,1), zeros(1000,1), zeros(1000,1)]
+
+for k=1:4
+
+    l = 2*k - 1
+    m = 2*k
+    y_tau[k][1] = vec_matrix[m][rand(1:3)]
+
+    for i=2:1000
+        x=rand()
+        for j=1:3
+            if y_tau[k][i-1]==vec_matrix[m][j]
+                pos[k][i] = j
+            end
+        end
+        prob_row = vec_matrix[l][floor(Int, pos[k][i]),:]
+        thr_1 = prob_row[1]
+        thr_2 = thr_1 + prob_row[2]
+        if x<=thr_1
+            y_tau[k][i]=vec_matrix[m][1]
+        elseif x>thr_1 && x<=thr_2
+            y_tau[k][i] = vec_matrix[m][2]
+        else
+            y_tau[k][i] = vec_matrix[m][3]
+        end
     end
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_tau)
+plot(t, y_tau[1])
+plot(t, y_tau[2])
+plot(t, y_tau[3])
+plot(t, y_tau[4])
 
 ##############
 # Question 2 #
