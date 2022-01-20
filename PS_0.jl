@@ -40,7 +40,7 @@ function tauchen(N::Integer, ρ::T1, σ::T2, μ=zero(promote_type(T1, T2)), n_st
     
 end
 
-z = tauchen(3,0.2,0.4,3)
+z = tauchen(3,0.2,0.4)
 prob_tau = z[1]
 ybar_tau = @show Vector(z[2])
 
@@ -163,6 +163,56 @@ plot(t, y_ar)
 ##############
 
 # Tauchen
+z = tauchen(10,0.2,0.4)
+prob_tau = z[1]
+ybar_tau = @show Vector(z[2])
+
+y_tau = zeros(1000,1)
+pos = zeros(1000,1)
+y_tau[1] = ybar_tau[rand(1:10)]
+
+for i=2:1000
+    x=rand()
+    for j=1:10
+        if y_tau[i-1]==ybar_tau[j]
+            pos[i] = j
+        end
+    end
+    prob_row = prob_tau[floor(Int, pos[i]),:]
+    thr_1 = prob_row[1]
+    thr_2 = thr_1 + prob_row[2]
+    thr_3 = thr_2 + prob_row[3]
+    thr_4 = thr_3 + prob_row[4]
+    thr_5 = thr_4 + prob_row[5]
+    thr_6 = thr_5 + prob_row[6]
+    thr_7 = thr_6 + prob_row[7]
+    thr_8 = thr_7 + prob_row[8]
+    thr_9 = thr_8 + prob_row[9]
+    if x<=thr_1
+        y_tau[i]=ybar_tau[1]
+    elseif x>thr_1 && x<=thr_2
+        y_tau[i] = ybar_tau[2]
+    elseif x>thr_2 && x<=thr_3
+        y_tau[i] = ybar_tau[3]
+    elseif x>thr_3 && x<=thr_4
+        y_tau[i] = ybar_tau[4]
+    elseif x>thr_4 && x<=thr_5
+        y_tau[i] = ybar_tau[5]
+    elseif x>thr_5 && x<=thr_6
+        y_tau[i] = ybar_tau[6]
+    elseif x>thr_6 && x<=thr_7
+        y_tau[i] = ybar_tau[7]
+    elseif x>thr_7 && x<=thr_8
+        y_tau[i] = ybar_tau[8]
+    elseif x>thr_8 && x<=thr_9
+        y_tau[i] = ybar_tau[9]
+    else
+        y_tau[i] = ybar_tau[10]
+    end
+end
+
+t = collect(range(1,stop=1000,length=1000))
+plot(t, y_tau)
 
 # Rouwenhorst
 
