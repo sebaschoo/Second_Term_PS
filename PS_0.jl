@@ -98,10 +98,13 @@ end
 
 t = collect(range(1,stop=1000,length=1000))
 plot(t, y_tau[1])
+savefig("./PS0_tau3_1.png")
 plot(t, y_tau[2])
+savefig("./PS0_tau3_2.png")
 plot(t, y_tau[3])
+savefig("./PS0_tau3_3.png")
 plot(t, y_tau[4])
-
+savefig("./PS0_tau3_4.png")
 
 ##############
 # Question 2 #
@@ -188,9 +191,13 @@ end
 
 t = collect(range(1,stop=1000,length=1000))
 plot(t, y_rou[1])
+savefig("./PS0_rou3_1.png")
 plot(t, y_rou[2])
+savefig("./PS0_rou3_2.png")
 plot(t, y_rou[3])
+savefig("./PS0_rou3_3.png")
 plot(t, y_rou[4])
+savefig("./PS0_rou3_4.png")
 
 
 ##############
@@ -226,9 +233,13 @@ end
 
 t = collect(range(1,stop=1000,length=1000))
 plot(t, y_ar[1])
+savefig("./PS0_ar_1.png")
 plot(t, y_ar[2])
+savefig("./PS0_ar_2.png")
 plot(t, y_ar[3])
+savefig("./PS0_ar_3.png")
 plot(t, y_ar[4])
+savefig("./PS0_ar_4.png")
 
 
 ##############
@@ -307,9 +318,13 @@ end
 
 t = collect(range(1,stop=1000,length=1000))
 plot(t, y_tau[1])
+savefig("./PS0_tau10_1.png")
 plot(t, y_tau[2])
+savefig("./PS0_tau10_2.png")
 plot(t, y_tau[3])
+savefig("./PS0_tau10_3.png")
 plot(t, y_tau[4])
+savefig("./PS0_tau10_4.png")
 
 # Rouwenhorst
 vec_matrix = [zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10), zeros(10,10), zeros(10)]
@@ -384,9 +399,13 @@ end
 
 t = collect(range(1,stop=1000,length=1000))
 plot(t, y_rou[1])
+savefig("./PS0_rou10_1.png")
 plot(t, y_rou[2])
+savefig("./PS0_rou10_2.png")
 plot(t, y_rou[3])
+savefig("./PS0_rou10_3.png")
 plot(t, y_rou[4])
+savefig("./PS0_rou10_4.png")
 
 ##############
 # Question 5 #
@@ -394,3 +413,4 @@ plot(t, y_rou[4])
 
 #= The coding for this question is already included previously in loops
     =#
+
