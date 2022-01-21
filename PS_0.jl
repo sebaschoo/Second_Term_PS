@@ -411,23 +411,42 @@ savefig("./PS0_rou10_3.png")
 plot(t, y_rou[4], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_4.png")
 
-table = [zeros(4,6), zeros(4,6), zeros(4,6), zeros(4,6)]
+table1 = zeros(4,6)
+table2 = zeros(4,6)
+table3 = zeros(4,6)
 
-for i=1:4
-    for j=1:4
-        table[i][j,1] = mean(y_tau[j])
-        table[i][j,2] = var(y_tau[j])
-        table[i][j,3] = percentile(vec(y_tau[j]),25)
-        table[i][j,4] = percentile(vec(y_tau[j]),50)
-        table[i][j,5] = percentile(vec(y_tau[j]),75)
-        table[i][j,6] = percentile(vec(y_tau[j]),90)
-    end 
-end
+for j=1:4
+    table1[j,1] = mean(y_tau[j])
+    table1[j,2] = var(y_tau[j])
+    table1[j,3] = percentile(vec(y_tau[j]),25)
+    table1[j,4] = percentile(vec(y_tau[j]),50)
+    table1[j,5] = percentile(vec(y_tau[j]),75)
+    table1[j,6] = percentile(vec(y_tau[j]),90)
+end 
 
-CSV.write("table1.csv",  Tables.table(table[1]), writeheader=false)
-CSV.write("table2.csv",  Tables.table(table[2]), writeheader=false)
-CSV.write("table3.csv",  Tables.table(table[3]), writeheader=false)
-CSV.write("table4.csv",  Tables.table(table[4]), writeheader=false)
+CSV.write("table1.csv",  Tables.table(table1), writeheader=false)
+
+for j=1:4
+    table2[j,1] = mean(y_rou[j])
+    table2[j,2] = var(y_rou[j])
+    table2[j,3] = percentile(vec(y_rou[j]),25)
+    table2[j,4] = percentile(vec(y_rou[j]),50)
+    table2[j,5] = percentile(vec(y_rou[j]),75)
+    table2[j,6] = percentile(vec(y_rou[j]),90)
+end 
+
+CSV.write("table2.csv",  Tables.table(table2), writeheader=false)
+
+for j=1:4
+    table3[j,1] = mean(y_ar[j])
+    table3[j,2] = var(y_ar[j])
+    table3[j,3] = percentile(vec(y_ar[j]),25)
+    table3[j,4] = percentile(vec(y_ar[j]),50)
+    table3[j,5] = percentile(vec(y_ar[j]),75)
+    table3[j,6] = percentile(vec(y_ar[j]),90)
+end 
+
+CSV.write("table3.csv",  Tables.table(table3), writeheader=false)
 
 ##############
 # Question 5 #
