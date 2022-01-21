@@ -111,6 +111,19 @@ savefig("./PS0_tau3_3.png")
 plot(t, y_tau[4], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau3_4.png")
 
+table1_1 = zeros(4,6)
+
+for j=1:4
+    table1_1[j,1] = mean(y_tau[j])
+    table1_1[j,2] = var(y_tau[j])
+    table1_1[j,3] = percentile(vec(y_tau[j]),25)
+    table1_1[j,4] = percentile(vec(y_tau[j]),50)
+    table1_1[j,5] = percentile(vec(y_tau[j]),75)
+    table1_1[j,6] = percentile(vec(y_tau[j]),90)
+end 
+
+CSV.write("table1_1.csv",  Tables.table(table1_1), writeheader=false)
+
 ##############
 # Question 2 #
 ##############
@@ -204,6 +217,18 @@ savefig("./PS0_rou3_3.png")
 plot(t, y_rou[4], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou3_4.png")
 
+table2_2 = zeros(4,6)
+
+for j=1:4
+    table2_2[j,1] = mean(y_rou[j])
+    table2_2[j,2] = var(y_rou[j])
+    table2_2[j,3] = percentile(vec(y_rou[j]),25)
+    table2_2[j,4] = percentile(vec(y_rou[j]),50)
+    table2_2[j,5] = percentile(vec(y_rou[j]),75)
+    table2_2[j,6] = percentile(vec(y_rou[j]),90)
+end 
+
+CSV.write("table2_2.csv",  Tables.table(table2_2), writeheader=false)
 
 ##############
 # Question 3 #
