@@ -97,13 +97,13 @@ for k=1:4
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_tau[1])
+plot(t, y_tau[1], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau3_1.png")
-plot(t, y_tau[2])
+plot(t, y_tau[2], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau3_2.png")
-plot(t, y_tau[3])
+plot(t, y_tau[3], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau3_3.png")
-plot(t, y_tau[4])
+plot(t, y_tau[4], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau3_4.png")
 
 ##############
@@ -190,13 +190,13 @@ for k=1:4
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_rou[1])
+plot(t, y_rou[1], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou3_1.png")
-plot(t, y_rou[2])
+plot(t, y_rou[2], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou3_2.png")
-plot(t, y_rou[3])
+plot(t, y_rou[3], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou3_3.png")
-plot(t, y_rou[4])
+plot(t, y_rou[4], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou3_4.png")
 
 
@@ -232,13 +232,13 @@ for i in [0.2, 0.7, 0.9, 0.98]
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_ar[1])
+plot(t, y_ar[1], title=" ", legend = :false, xlabel = "Time", color = :tan2)
 savefig("./PS0_ar_1.png")
-plot(t, y_ar[2])
+plot(t, y_ar[2], title=" ", legend = :false, xlabel = "Time", color = :tan2)
 savefig("./PS0_ar_2.png")
-plot(t, y_ar[3])
+plot(t, y_ar[3], title=" ", legend = :false, xlabel = "Time", color = :tan2)
 savefig("./PS0_ar_3.png")
-plot(t, y_ar[4])
+plot(t, y_ar[4], title=" ", legend = :false, xlabel = "Time", color = :tan2)
 savefig("./PS0_ar_4.png")
 
 
@@ -317,13 +317,13 @@ for k=1:4
 end   
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_tau[1])
+plot(t, y_tau[1], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau10_1.png")
-plot(t, y_tau[2])
+plot(t, y_tau[2], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau10_2.png")
-plot(t, y_tau[3])
+plot(t, y_tau[3], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau10_3.png")
-plot(t, y_tau[4])
+plot(t, y_tau[4], title=" ", legend = :false, xlabel = "Time")
 savefig("./PS0_tau10_4.png")
 
 # Rouwenhorst
@@ -398,13 +398,13 @@ for k=1:4
 end
 
 t = collect(range(1,stop=1000,length=1000))
-plot(t, y_rou[1])
+plot(t, y_rou[1], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_1.png")
-plot(t, y_rou[2])
+plot(t, y_rou[2], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_2.png")
-plot(t, y_rou[3])
+plot(t, y_rou[3], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_3.png")
-plot(t, y_rou[4])
+plot(t, y_rou[4], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_4.png")
 
 ##############
