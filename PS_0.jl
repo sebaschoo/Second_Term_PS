@@ -12,6 +12,12 @@ using QuantEcon
 using Plots
 using NLopt
 using SpecialFunctions
+using StatsBase
+using DataFrames
+using DelimitedFiles
+using CSV
+
+Random.seed!(641993)
 
 ############
 # Question 1
@@ -50,7 +56,6 @@ end
 vec_matrix = [zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1), zeros(3,3), 1:1:length(1)]
 
 for i in [0.2, 0.7, 0.9, 0.98]
-    Random.seed!(641993)
     z = tauchen(3,i,0.4)
     if i==0.2
         vec_matrix[1] = z[1]
@@ -207,7 +212,6 @@ savefig("./PS0_rou3_4.png")
 function normal_ar(ρ, N)
     d = Normal(0, 0.16)
     y = [0.0 for i = 1:N]
-    Random.seed!(641993)
     ϵ = rand(d, N)
     for i in 1:(N-1)
         y[i+1] = ρ*y[i] + ϵ[i] 
@@ -407,10 +411,27 @@ savefig("./PS0_rou10_3.png")
 plot(t, y_rou[4], title=" ", legend = :false, xlabel = "Time", color = :deepskyblue3)
 savefig("./PS0_rou10_4.png")
 
+table = [zeros(4,6), zeros(4,6), zeros(4,6), zeros(4,6)]
+
+for i=1:4
+    for j=1:4
+        table[i][j,1] = mean(y_tau[j])
+        table[i][j,2] = var(y_tau[j])
+        table[i][j,3] = percentile(vec(y_tau[j]),25)
+        table[i][j,4] = percentile(vec(y_tau[j]),50)
+        table[i][j,5] = percentile(vec(y_tau[j]),75)
+        table[i][j,6] = percentile(vec(y_tau[j]),90)
+    end 
+end
+
+CSV.write("table1.csv",  Tables.table(table[1]), writeheader=false)
+CSV.write("table2.csv",  Tables.table(table[2]), writeheader=false)
+CSV.write("table3.csv",  Tables.table(table[3]), writeheader=false)
+CSV.write("table4.csv",  Tables.table(table[4]), writeheader=false)
+
 ##############
 # Question 5 #
 ##############
 
 #= The coding for this question is already included previously in loops
     =#
-
